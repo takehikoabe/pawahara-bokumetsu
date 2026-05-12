@@ -133,6 +133,10 @@ export default function HomePage() {
         AI判定は参考情報であり、法的結論ではありません。<br />
         録音・撮影・提出前には専門家へのご相談をお勧めします。
       </p>
+      <div className="mt-4 flex justify-center gap-4 text-[10px] text-gray-400">
+        <Link href="/legal" className="underline hover:text-gray-600">特定商取引法に基づく表記</Link>
+        <Link href="/pricing" className="underline hover:text-gray-600">料金プラン</Link>
+      </div>
     </main>
   )
 }
