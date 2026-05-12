@@ -7,17 +7,18 @@ import type { Incident, HealthLog } from '@/types'
 import { formatDate, riskLabel, riskBg, WHAT_HAPPENED_LABELS } from '@/lib/utils'
 import {
   Mic, FilePlus, MessageSquare, Heart, Shield,
-  BarChart2, FileText, ChevronRight, AlertTriangle
+  BarChart2, FileText, ChevronRight, AlertTriangle, Pill
 } from 'lucide-react'
 
 const NAV_ITEMS = [
-  { href: '/voice',    icon: Mic,           label: '録音する',       color: 'bg-red-500' },
-  { href: '/record',   icon: FilePlus,       label: '今すぐ記録',     color: 'bg-indigo-600' },
-  { href: '/vent',     icon: MessageSquare,  label: 'ぼやきを書く',   color: 'bg-violet-500' },
-  { href: '/health',   icon: Heart,          label: '心身チェック',   color: 'bg-pink-500' },
-  { href: '/evidence', icon: Shield,         label: '証拠を見る',     color: 'bg-teal-600' },
-  { href: '/graph',    icon: BarChart2,      label: 'リスクグラフ',   color: 'bg-amber-500' },
-  { href: '/report',   icon: FileText,       label: '相談資料を作る', color: 'bg-emerald-600' },
+  { href: '/voice',      icon: Mic,           label: '録音する',       color: 'bg-red-500' },
+  { href: '/record',     icon: FilePlus,       label: '今すぐ記録',     color: 'bg-indigo-600' },
+  { href: '/vent',       icon: MessageSquare,  label: 'ぼやきを書く',   color: 'bg-violet-500' },
+  { href: '/health',     icon: Heart,          label: '心身チェック',   color: 'bg-pink-500' },
+  { href: '/medication', icon: Pill,           label: '服薬・通院',     color: 'bg-rose-600' },
+  { href: '/evidence',   icon: Shield,         label: '証拠を見る',     color: 'bg-teal-600' },
+  { href: '/graph',      icon: BarChart2,      label: 'リスクグラフ',   color: 'bg-amber-500' },
+  { href: '/report',     icon: FileText,       label: '相談資料を作る', color: 'bg-emerald-600' },
 ]
 
 export default function HomePage() {

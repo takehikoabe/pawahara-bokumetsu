@@ -51,3 +51,19 @@ export async function getEvidenceByIncident(incidentId: number): Promise<Evidenc
 export async function saveEvidenceFile(file: Omit<EvidenceFile, 'id'>): Promise<number> {
   return db.evidenceFiles.add(file)
 }
+
+export async function getAllEvidenceFiles(): Promise<EvidenceFile[]> {
+  return db.evidenceFiles.orderBy('createdAt').reverse().toArray()
+}
+
+export async function getMedicationLogs(limit = 100): Promise<MedicationLog[]> {
+  return db.medicationLogs.orderBy('takenAt').reverse().limit(limit).toArray()
+}
+
+export async function saveMedicationLog(log: Omit<MedicationLog, 'id'>): Promise<number> {
+  return db.medicationLogs.add(log)
+}
+
+export async function deleteMedicationLog(id: number): Promise<void> {
+  return db.medicationLogs.delete(id)
+}
