@@ -2,12 +2,13 @@
 
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import { useUser, UserButton } from '@clerk/nextjs'
 import { getRecentIncidents, getRecentHealthLogs } from '@/lib/db'
 import type { Incident, HealthLog } from '@/types'
 import { formatDate, riskLabel, riskBg, WHAT_HAPPENED_LABELS } from '@/lib/utils'
 import {
   Mic, FilePlus, MessageSquare, Heart, Shield,
-  BarChart2, FileText, ChevronRight, AlertTriangle, Pill
+  BarChart2, FileText, ChevronRight, AlertTriangle, Pill, Crown
 } from 'lucide-react'
 
 const NAV_ITEMS = [
@@ -24,6 +25,8 @@ const NAV_ITEMS = [
 export default function HomePage() {
   const [incidents, setIncidents] = useState<Incident[]>([])
   const [latestHealth, setLatestHealth] = useState<HealthLog | null>(null)
+  const { user } = useUser()
+  const plan = (user?.publicMetadata?.plan as string) ?? 'free'
 
   useEffect(() => {
     getRecentIncidents(5).then(setIncidents)
@@ -37,13 +40,22 @@ export default function HomePage() {
   return (
     <main className="max-w-md mx-auto px-4 pb-20">
       {/* ヘッダー */}
-      <header className="pt-10 pb-6 text-center">
+      <header className="pt-8 pb-6">
+        <div className="flex justify-between items-center mb-4">
+          <Link href="/pricing" className={`flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-full ${plan === 'premium' ? 'bg-violet-100 text-violet-700' : plan === 'standard' ? 'bg-indigo-100 text-indigo-700' : 'bg-gray-100 text-gray-600'}`}>
+            {plan !== 'free' && <Crown size={11} />}
+            {plan === 'premium' ? 'プレミアム' : plan === 'standard' ? 'スタンダード' : '無料プラン'}
+          </Link>
+          <UserButton />
+        </div>
+        <div className="text-center">
         <div className="inline-flex items-center gap-2 bg-indigo-600 text-white px-4 py-1.5 rounded-full text-xs font-bold mb-3 shadow">
           <AlertTriangle size={13} />
           証拠化・相談資料作成支援
         </div>
         <h1 className="text-3xl font-black text-indigo-900 tracking-tight">パワハラ撲滅</h1>
         <p className="text-sm text-gray-500 mt-1">感情を整理し、事実を資料に変える</p>
+        </div>
       </header>
 
       {/* サマリーカード */}

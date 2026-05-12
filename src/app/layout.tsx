@@ -1,4 +1,6 @@
 import type { Metadata } from 'next'
+import { ClerkProvider } from '@clerk/nextjs'
+import { jaJP } from '@clerk/localizations'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -8,8 +10,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ja" className="h-full">
-      <body className="min-h-full flex flex-col bg-[#f5f4ff]">{children}</body>
-    </html>
+    <ClerkProvider localization={jaJP}>
+      <html lang="ja" className="h-full">
+        <body className="min-h-full flex flex-col bg-[#f5f4ff]">{children}</body>
+      </html>
+    </ClerkProvider>
   )
 }
